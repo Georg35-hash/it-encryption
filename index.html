@@ -14,7 +14,7 @@
     </header>
 
     <main>
-        <!-- ABRECHNUNG / GENERATOR -->
+        <!-- ENCODER -->
         <section class="encoder-section">
             <div class="container">
                 <h2>🔐 Nachricht verschlüsseln & QR-Code generieren</h2>
@@ -30,8 +30,7 @@
                     </div>
                     <button id="generate-btn" class="btn-primary">Verschlüsseln & QR erstellen</button>
                     <button id="show-solution-btn" class="btn-primary solution-btn">Lösung anzeigen</button>
-                    <div class="result-box" id="encrypted-output">Deine verschlüsselte Nachricht erscheint hier...</div>
-                    <div id="qr-code-container"></div>
+                    <div id="qr-code-container" style="margin-top:1rem;"></div>
                 </div>
             </div>
         </section>
@@ -40,7 +39,7 @@
         <section class="decrypt-section">
             <div class="container">
                 <h2>🔓 QR-Code entschlüsseln</h2>
-                <p style="text-align: center; margin-bottom: 1rem;">Scanne den QR-Code und entschlüssle die Nachricht</p>
+                <p style="text-align:center;margin-bottom:1rem;">Scanne den QR-Code und entschlüssle die Nachricht</p>
                 <div class="encoder-card">
                     <div class="input-row">
                         <input type="text" id="decrypt-input" placeholder="Eingabe vom QR-Scan...">
@@ -64,17 +63,30 @@
                 <div class="quiz-content">
                     <div class="puzzle-card">
                         <p class="puzzle-text" id="quiz-text">Das geheime Wort: <strong id="quiz-encrypted"></strong></p>
-                        <p class="hint">Tipp: Entschlüssele mit der angegebenen Methode!</p>
+
+                        <!-- Выбор метода для пазла -->
+                        <div class="input-row" style="margin-bottom:.8rem;">
+                            <label style="color:#aaa;font-size:.9rem;">Methode:</label>
+                            <select id="puzzle-method-select" class="method-select">
+                                <option value="caesar">Caesar (Shift 3)</option>
+                                <option value="base64">Base64</option>
+                                <option value="atbash">Atbash</option>
+                                <option value="binary">Binary</option>
+                            </select>
+                        </div>
+
+                        <p class="hint">Tipp: Entschlüssele mit Caesar (Shift 3)!</p>
                         <div class="input-row">
                             <input type="text" id="puzzle-decrypt-input" placeholder="Deine Antwort...">
                             <button id="check-puzzle">Prüfen</button>
                             <button id="show-solution">Lösung</button>
+                            <button id="new-puzzle-btn">Neues Wort</button>
                         </div>
                         <p id="puzzle-result"></p>
                     </div>
                 </div>
-                
-                <h2 style="margin-top: 2rem;">🔐 2. Wissenstest: Welche Antwort ist korrekt?</h2>
+
+                <h2 style="margin-top:2rem;">🔐 2. Wissenstest: Welche Antwort ist korrekt?</h2>
                 <div class="quiz-content">
                     <div class="quiz-multi">
                         <div class="quiz-question">
@@ -140,16 +152,33 @@
                                 <label><input type="radio" name="q7" value="D"> D) Passwörter auf Papier</label>
                             </div>
                         </div>
-                        
-                        <button id="check-quiz" class="btn-primary" style="margin-top: 1.5rem;">Wissenstest auswerten</button>
-                        <p id="quiz-score" style="margin-top: 1rem; font-weight: bold; font-size: 1.1rem;"></p>
+                        <button id="check-quiz" class="btn-primary" style="margin-top:1.5rem;">Wissenstest auswerten</button>
+                        <p id="quiz-score" style="margin-top:1rem;font-weight:bold;font-size:1.1rem;"></p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- SPIEL -->
+        <section class="game-section" style="padding:3rem 0;text-align:center;">
+            <div class="container">
+                <h2>🕵️ 3. Geheimauftrag – Quiz-Spiel</h2>
+                <p style="margin:.8rem 0 1.5rem;color:#aaa;">Teste dein Wissen im Jeopardy-Stil!</p>
+                <button id="open-game-btn" class="btn-primary" style="font-size:1.1rem;padding:.9rem 2.5rem;">▶ Spiel starten</button>
+            </div>
+        </section>
     </main>
 
-    <!-- Ihr JavaScript-Code -->
-    <script src="script.js"></script>
+    <!-- GAME MODAL (inline, kein iframe) -->
+    <div id="game-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:8000;align-items:center;justify-content:center;">
+        <div id="game-modal-box" style="background:#0a0e1a;border:2px solid #1e3a5f;border-radius:20px;width:min(96vw,880px);max-height:92vh;overflow-y:auto;position:relative;box-shadow:0 0 60px rgba(29,78,216,.35);">
+            <button id="close-game-btn" style="position:sticky;top:.8rem;float:right;margin:.8rem .8rem 0 0;background:none;border:none;color:#94a3b8;font-size:1.5rem;cursor:pointer;z-index:1;">✕</button>
+            <div id="game-root"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="app.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>
