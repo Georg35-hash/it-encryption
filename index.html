@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spion - Verschlüsselung & Geheime Kommunikation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="lang-switch"><a href="index-ru.html">RU</a></div>
+        <h1 class="gradient-text">Deine Nachricht an deinen Freund?<br>Warum sehen wir nur Chaos?</h1>
+        <p class="subtitle">Fühl dich wie ein Spion!</p>
+    </header>
+
+    <main>
+        <!-- ABRECHNUNG / GENERATOR -->
+        <section class="encoder-section">
+            <div class="container">
+                <h2>🔐 Nachricht verschlüsseln & QR-Code generieren</h2>
+                <div class="encoder-card">
+                    <div class="input-row">
+                        <input type="text" id="message-input" placeholder="Gib deine geheime Nachricht ein...">
+                        <select id="method-select" class="method-select">
+                            <option value="caesar">Caesar (Shift 3)</option>
+                            <option value="base64">Base64</option>
+                            <option value="atbash">Atbash</option>
+                            <option value="binary">Binary</option>
+                        </select>
+                    </div>
+                    <button id="generate-btn" class="btn-primary">Verschlüsseln & QR erstellen</button>
+                    <button id="show-solution-btn" class="btn-primary solution-btn">Lösung anzeigen</button>
+                    <div class="result-box" id="encrypted-output">Deine verschlüsselte Nachricht erscheint hier...</div>
+                    <div id="qr-code-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DECRYPTOR -->
+        <section class="decrypt-section">
+            <div class="container">
+                <h2>🔓 QR-Code entschlüsseln</h2>
+                <p style="text-align: center; margin-bottom: 1rem;">Scanne den QR-Code und entschlüssle die Nachricht</p>
+                <div class="encoder-card">
+                    <div class="input-row">
+                        <input type="text" id="decrypt-input" placeholder="Eingabe vom QR-Scan...">
+                        <select id="decrypt-method" class="method-select">
+                            <option value="caesar">Caesar (Shift 3)</option>
+                            <option value="base64">Base64</option>
+                            <option value="atbash">Atbash</option>
+                            <option value="binary">Binary</option>
+                        </select>
+                    </div>
+                    <button id="decrypt-btn" class="btn-primary">Entschlüsseln</button>
+                    <div class="result-box" id="decrypted-output">Entschlüsselte Nachricht...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZ & RÄTSEL -->
+        <section class="quiz-section">
+            <div class="container">
+                <h2>🔐 1. Rätsel: Entschlüssele das Wort!</h2>
+                <div class="quiz-content">
+                    <div class="puzzle-card">
+                        <p class="puzzle-text" id="quiz-text">Das geheime Wort: <strong id="quiz-encrypted"></strong></p>
+                        <p class="hint">Tipp: Entschlüssele mit der angegebenen Methode!</p>
+                        <div class="input-row">
+                            <input type="text" id="puzzle-decrypt-input" placeholder="Deine Antwort...">
+                            <button id="check-puzzle">Prüfen</button>
+                            <button id="show-solution">Lösung</button>
+                        </div>
+                        <p id="puzzle-result"></p>
+                    </div>
+                </div>
+                
+                <h2 style="margin-top: 2rem;">🔐 2. Wissenstest: Welche Antwort ist korrekt?</h2>
+                <div class="quiz-content">
+                    <div class="quiz-multi">
+                        <div class="quiz-question">
+                            <h4>1. Bei Caesar-Verschlüsselung mit Schrittweite 3 wird aus A ...</h4>
+                            <div class="quiz-answers">
+                                <label><input type="radio" name="q1" value="A"> A) B</label>
+                                <label><input type="radio" name="q1" value="B"> B) C</label>
+                                <label><input type="radio" name="q1" value="C"> C) D</label>
+                                <label><input type="radio" name="q1" value="D"> D) Z</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <h4>2. Welche Maschine im 2. Weltkrieg?</h4>
+                            <div class="quiz-answers">
+                                <label><input type="radio" name="q2" value="A"> A) AES</label>
+                                <label><input type="radio" name="q2" value="B"> B) Enigma</label>
+                                <label><input type="radio" name="q2" value="C"> C) RSA</label>
+                                <label><input type="radio" name="q2" value="D"> D) Skytale</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <h4>3. Was bedeutet "Klartext"?</h4>
+                            <div class="quiz-answers">
+                                <label><input type="radio" name="q3" value="A"> A) Verschlüsselte Nachricht</label>
+                                <label><input type="radio" name="q3" value="B"> B) Geheimer Schlüssel</label>
+                                <label><input type="radio" name="q3" value="C"> C) Ursprüngliche, lesbare Nachricht</label>
+                                <label><input type="radio" name="q3" value="D"> D) Passwort</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <h4>4. Was braucht man zum Entschlüsseln?</h4>
+                            <div class="quiz-answers">
+                                <label><input type="radio" name="q4" value="A"> A) Drucker</label>
+                                <label><input type="radio" name="q4" value="B"> B) Schlüssel</label>
+                                <label><input type="radio" name="q4" value="C"> C) Datenbank</label>
+                                <label><input type="radio" name="q4" value="D"> D) Scanner</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <h4>5. Vigenère-Verschlüsselung nutzt ...</h4>
+                            <div class="quiz-answers">
+                                <label><input type="radio" name="q5" value="A"> A) Mehrere Alphabete</label>
+                                <label><input type="radio" name="q5" value="B"> B) Keinen Schlüssel</label>
+                                <label><input type="radio" name="q5" value="C"> C) Bildverschlüsselung</label>
+                                <label><input type="radio" name="q5" value="D"> D) Daten komprimieren</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <h4>6. Wo begegnet uns Verschlüsselung heute?</h4>
+                            <div class="quiz-answers">
+                                <label><input type="radio" name="q6" value="A"> A) Online-Banking</label>
+                                <label><input type="radio" name="q6" value="B"> B) Messenger-Apps</label>
+                                <label><input type="radio" name="q6" value="C"> C) HTTPS-Webseiten</label>
+                                <label><input type="radio" name="q6" value="D"> D) Alle</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <h4>7. Was schützt asymmetrische Verschlüsselung (wie RSA)?</h4>
+                            <div class="quiz-answers">
+                                <label><input type="radio" name="q7" value="A"> A) Nur USB-Sticks</label>
+                                <label><input type="radio" name="q7" value="B"> B) Analoge Briefe</label>
+                                <label><input type="radio" name="q7" value="C"> C) Sicheren Datenaustausch im Web</label>
+                                <label><input type="radio" name="q7" value="D"> D) Passwörter auf Papier</label>
+                            </div>
+                        </div>
+                        
+                        <button id="check-quiz" class="btn-primary" style="margin-top: 1.5rem;">Wissenstest auswerten</button>
+                        <p id="quiz-score" style="margin-top: 1rem; font-weight: bold; font-size: 1.1rem;"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Ihr JavaScript-Code -->
+    <script src="script.js"></script>
+</body>
+</html>
