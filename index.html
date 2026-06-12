@@ -28,8 +28,30 @@
                         </select>
                     </div>
                     <button id="generate-btn" class="btn-primary">Verschlüsseln & QR erstellen</button>
-                    <button id="show-solution-btn" class="btn-primary solution-btn"></button>
                     <div id="qr-code-container" style="margin-top:1rem;"></div>
+
+                    <!-- CHALLENGE появляется после генерации QR -->
+                    <div id="challenge-box" style="display:none;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.15);padding-top:1.2rem;">
+                        <div style="text-align:center;margin-bottom:.8rem;">
+                            <span style="color:#f59e0b;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;">🕵️ Kannst du es entschlüsseln?</span>
+                        </div>
+                        <div style="display:flex;justify-content:center;gap:1rem;margin-bottom:.8rem;flex-wrap:wrap;">
+                            <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:.4rem 1rem;font-size:.85rem;color:#aaa;">
+                                Methode: <span id="challenge-method-label" style="color:#00d4ff;font-weight:700;"></span>
+                            </div>
+                            <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:.4rem 1rem;font-size:.85rem;color:#aaa;">
+                                ⏱ <span id="challenge-timer" style="color:#f59e0b;font-weight:700;">60</span>s
+                            </div>
+                        </div>
+                        <div style="text-align:center;font-family:'Courier New',monospace;font-size:1.1rem;background:rgba(0,0,0,.3);border-radius:10px;padding:.7rem;margin-bottom:.8rem;word-break:break-all;" id="challenge-encrypted-display"></div>
+                        <div id="challenge-hints" style="margin-bottom:.8rem;"></div>
+                        <div style="display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;">
+                            <input type="text" id="challenge-input" placeholder="Deine Antwort..." style="flex:1;min-width:160px;padding:.6rem 1rem;border:none;border-radius:12px;background:rgba(255,255,255,.15);color:#fff;font-size:.95rem;">
+                            <button id="challenge-check" style="padding:.6rem 1.2rem;border:none;border-radius:12px;background:linear-gradient(90deg,#4CAF50,#00d4ff);color:#fff;font-weight:700;cursor:pointer;">Prüfen</button>
+                            <button id="challenge-hint-btn" style="padding:.6rem 1rem;border:none;border-radius:12px;background:rgba(255,165,0,.2);color:#ffa500;font-weight:700;cursor:pointer;border:1px solid #ffa500;">💡 Tipp</button>
+                        </div>
+                        <p id="challenge-result" style="text-align:center;margin-top:.7rem;font-weight:700;min-height:1.2rem;"></p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -55,104 +77,14 @@
             </div>
         </section>
 
-        <!-- QUIZ & RÄTSEL -->
+        <!-- WISSENSTEST -->
         <section class="quiz-section">
             <div class="container">
-                <h2>🔐 1. Rätsel: Entschlüssele das Wort!</h2>
+                <h2>🔐 Wissenstest: Welche Antwort ist korrekt?</h2>
                 <div class="quiz-content">
-                    <div class="puzzle-card">
-                        <p class="puzzle-text" id="quiz-text">Das geheime Wort: <strong id="quiz-encrypted"></strong></p>
-
-                        <!-- Выбор метода для пазла -->
-                        <div class="input-row" style="margin-bottom:.8rem;">
-                            <label style="color:#aaa;font-size:.9rem;">Methode:</label>
-                            <select id="puzzle-method-select" class="method-select">
-                                <option value="caesar">Caesar (Shift 3)</option>
-                                <option value="base64">Base64</option>
-                                <option value="atbash">Atbash</option>
-                                <option value="binary">Binary</option>
-                            </select>
-                        </div>
-
-                        <p class="hint">Tipp: Entschlüssele mit Caesar (Shift 3)!</p>
-                        <div class="input-row">
-                            <input type="text" id="puzzle-decrypt-input" placeholder="Deine Antwort...">
-                            <button id="check-puzzle">Prüfen</button>
-                            <button id="show-solution">Lösung</button>
-                            <button id="new-puzzle-btn">Neues Wort</button>
-                        </div>
-                        <p id="puzzle-result"></p>
-                    </div>
-                </div>
-
-                <h2 style="margin-top:2rem;">🔐 2. Wissenstest: Welche Antwort ist korrekt?</h2>
-                <div class="quiz-content">
-                    <div class="quiz-multi">
-                        <div class="quiz-question">
-                            <h4>1. Bei Caesar-Verschlüsselung mit Schrittweite 3 wird aus A ...</h4>
-                            <div class="quiz-answers">
-                                <label><input type="radio" name="q1" value="A"> A) B</label>
-                                <label><input type="radio" name="q1" value="B"> B) C</label>
-                                <label><input type="radio" name="q1" value="C"> C) D</label>
-                                <label><input type="radio" name="q1" value="D"> D) Z</label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <h4>2. Welche Maschine im 2. Weltkrieg?</h4>
-                            <div class="quiz-answers">
-                                <label><input type="radio" name="q2" value="A"> A) AES</label>
-                                <label><input type="radio" name="q2" value="B"> B) Enigma</label>
-                                <label><input type="radio" name="q2" value="C"> C) RSA</label>
-                                <label><input type="radio" name="q2" value="D"> D) Skytale</label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <h4>3. Was bedeutet "Klartext"?</h4>
-                            <div class="quiz-answers">
-                                <label><input type="radio" name="q3" value="A"> A) Verschlüsselte Nachricht</label>
-                                <label><input type="radio" name="q3" value="B"> B) Geheimer Schlüssel</label>
-                                <label><input type="radio" name="q3" value="C"> C) Ursprüngliche, lesbare Nachricht</label>
-                                <label><input type="radio" name="q3" value="D"> D) Passwort</label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <h4>4. Was braucht man zum Entschlüsseln?</h4>
-                            <div class="quiz-answers">
-                                <label><input type="radio" name="q4" value="A"> A) Drucker</label>
-                                <label><input type="radio" name="q4" value="B"> B) Schlüssel</label>
-                                <label><input type="radio" name="q4" value="C"> C) Datenbank</label>
-                                <label><input type="radio" name="q4" value="D"> D) Scanner</label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <h4>5. Vigenère-Verschlüsselung nutzt ...</h4>
-                            <div class="quiz-answers">
-                                <label><input type="radio" name="q5" value="A"> A) Mehrere Alphabete</label>
-                                <label><input type="radio" name="q5" value="B"> B) Keinen Schlüssel</label>
-                                <label><input type="radio" name="q5" value="C"> C) Bildverschlüsselung</label>
-                                <label><input type="radio" name="q5" value="D"> D) Daten komprimieren</label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <h4>6. Wo begegnet uns Verschlüsselung heute?</h4>
-                            <div class="quiz-answers">
-                                <label><input type="radio" name="q6" value="A"> A) Online-Banking</label>
-                                <label><input type="radio" name="q6" value="B"> B) Messenger-Apps</label>
-                                <label><input type="radio" name="q6" value="C"> C) HTTPS-Webseiten</label>
-                                <label><input type="radio" name="q6" value="D"> D) Alle</label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <h4>7. Was schützt asymmetrische Verschlüsselung (wie RSA)?</h4>
-                            <div class="quiz-answers">
-                                <label><input type="radio" name="q7" value="A"> A) Nur USB-Sticks</label>
-                                <label><input type="radio" name="q7" value="B"> B) Analoge Briefe</label>
-                                <label><input type="radio" name="q7" value="C"> C) Sicheren Datenaustausch im Web</label>
-                                <label><input type="radio" name="q7" value="D"> D) Passwörter auf Papier</label>
-                            </div>
-                        </div>
-                        <button id="check-quiz" class="btn-primary" style="margin-top:1.5rem;">Wissenstest auswerten</button>
-                        <p id="quiz-score" style="margin-top:1rem;font-weight:bold;font-size:1.1rem;"></p>
+                    <div style="text-align:center;padding:1.5rem 0;">
+                        <p style="color:#aaa;margin-bottom:1.2rem;">7 zufällige Fragen aus 20 — jedes Mal anders!</p>
+                        <button id="open-quiz-btn" class="btn-primary" style="font-size:1.1rem;padding:.9rem 2.5rem;">▶ Wissenstest starten</button>
                     </div>
                 </div>
             </div>
@@ -161,14 +93,14 @@
         <!-- SPIEL -->
         <section class="game-section" style="padding:3rem 0;text-align:center;">
             <div class="container">
-                <h2>🕵️ 3. Geheimauftrag – Quiz-Spiel</h2>
+                <h2>🕵️ Geheimauftrag – Quiz-Spiel</h2>
                 <p style="margin:.8rem 0 1.5rem;color:#aaa;">Teste dein Wissen im Jeopardy-Stil!</p>
                 <button id="open-game-btn" class="btn-primary" style="font-size:1.1rem;padding:.9rem 2.5rem;">▶ Spiel starten</button>
             </div>
         </section>
     </main>
 
-    <!-- GAME MODAL (inline, kein iframe) -->
+    <!-- GAME MODAL -->
     <div id="game-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:8000;align-items:center;justify-content:center;">
         <div id="game-modal-box" style="background:#0a0e1a;border:2px solid #1e3a5f;border-radius:20px;width:min(96vw,880px);max-height:92vh;overflow-y:auto;position:relative;box-shadow:0 0 60px rgba(29,78,216,.35);">
             <button id="close-game-btn" style="position:sticky;top:.8rem;float:right;margin:.8rem .8rem 0 0;background:none;border:none;color:#94a3b8;font-size:1.5rem;cursor:pointer;z-index:1;">✕</button>
@@ -176,8 +108,15 @@
         </div>
     </div>
 
+    <!-- QUIZ MODAL -->
+    <div id="quiz-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:8000;align-items:center;justify-content:center;">
+        <div id="quiz-modal-box" style="background:#0a0e1a;border:2px solid #1e3a5f;border-radius:20px;width:min(96vw,640px);max-height:92vh;overflow-y:auto;position:relative;box-shadow:0 0 60px rgba(29,78,216,.35);">
+            <button id="close-quiz-btn" style="position:sticky;top:.8rem;float:right;margin:.8rem .8rem 0 0;background:none;border:none;color:#94a3b8;font-size:1.5rem;cursor:pointer;z-index:1;">✕</button>
+            <div id="quiz-root"></div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="app.js"></script>
-    <script src="game.js"></script>
 </body>
 </html>
