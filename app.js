@@ -792,7 +792,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 { pts: 200, q: 'Diese Methode dreht das Alphabet komplett um — A wird Z, B wird Y.', a: 'Atbash' },
                 { pts: 300, q: 'Diese Methode wandelt Text in eine Folge aus Nullen und Einsen um.', a: 'Binary' },
                 { pts: 400, q: 'Diese Kodierung nutzt 64 Zeichen: A–Z, a–z, 0–9 sowie + und /.', a: 'Base64' },
-                { pts: 500, q: 'Diese Vigenère-ähnliche Methode nutzt ein Schlüsselwort statt eines festen Shifts.', a: 'Vigenere' },
+                { pts: 500, q: 'Diese Vigenere-ähnliche Methode nutzt ein Schlüsselwort statt eines festen Shifts.', a: 'Vigenere' },
             ]
         },
         {
