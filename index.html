@@ -22,9 +22,10 @@
                         <input type="text" id="message-input" placeholder="Gib deine geheime Nachricht ein...">
                         <select id="method-select" class="method-select">
                             <option value="caesar">Caesar (Shift 3)</option>
-                            <option value="base64">Base64</option>
-                            <option value="atbash">Atbash</option>
                             <option value="binary">Binary</option>
+                            <option value="decimal">Decimal</option>
+                            <option value="hex">Hexadecimal</option>
+                            <option value="vigenere">Polyalphabetisch (Vigenère)</option>
                         </select>
                     </div>
                     <button id="generate-btn" class="btn-primary">Verschlüsseln & QR erstellen</button>
@@ -66,9 +67,10 @@
                         <input type="text" id="decrypt-input" placeholder="Eingabe vom QR-Scan...">
                         <select id="decrypt-method" class="method-select">
                             <option value="caesar">Caesar (Shift 3)</option>
-                            <option value="base64">Base64</option>
-                            <option value="atbash">Atbash</option>
                             <option value="binary">Binary</option>
+                            <option value="decimal">Decimal</option>
+                            <option value="hex">Hexadecimal</option>
+                            <option value="vigenere">Polyalphabetisch (Vigenère)</option>
                         </select>
                     </div>
                     <button id="decrypt-btn" class="btn-primary">Entschlüsseln</button>

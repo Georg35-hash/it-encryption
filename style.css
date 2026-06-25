@@ -1,5 +1,9 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+:root {
+    color-scheme: dark;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
@@ -27,7 +31,20 @@ h2 { font-size: 1.8rem; text-align: center; margin-bottom: 1.5rem; color: #00d4f
 #message-input { flex: 1; min-width: 200px; padding: 0.8rem; border: none; border-radius: 15px; background: rgba(255, 255, 255, 0.2); color: #fff; font-size: 1rem; }
 #message-input::placeholder { color: rgba(255, 255, 255, 0.5); }
 
-.method-select { padding: 0.8rem; border: none; border-radius: 15px; background: rgba(255, 255, 255, 0.2); color: #fff; font-size: 1rem; cursor: pointer; }
+.method-select {
+    padding: 0.8rem;
+    border: none;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    color-scheme: dark;
+}
+.method-select option {
+    background: #1a1a2e;
+    color: #fff;
+}
 
 .btn-primary { padding: 0.8rem 1.5rem; border: none; border-radius: 15px; background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; font-weight: bold; cursor: pointer; transition: transform 0.3s; margin: 0.25rem; }
 .btn-primary:hover { transform: scale(1.03); }
@@ -71,7 +88,8 @@ footer { text-align: center; padding: 1rem; background: rgba(0, 0, 0, 0.3); marg
     .subtitle { font-size: 1rem; }
     .input-row { flex-direction: column; }
     #qr-code-container { width: 150px; height: 150px; }
-}/* ─── Styled Inputs — Dark Spy Theme ──────────────────────────────────────── */
+}
+/* ─── Styled Inputs — Dark Spy Theme ──────────────────────────────────────── */
 
 /* All text inputs sitewide */
 input[type="text"],
@@ -92,7 +110,7 @@ input[type="text"] {
 }
 
 input[type="text"]::placeholder {
-    color: #ffffff !important;
+    color: rgba(255, 255, 255, 0.55) !important;
     font-style: italic;
 }
 
