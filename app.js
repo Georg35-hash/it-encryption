@@ -183,7 +183,7 @@ function injectEncoderInfo() {
         <div class="method-row"><span class="method-icon">💾</span><div><div class="method-name">Binary</div><div class="method-desc">Jedes Zeichen wird als 8-Bit Binärcode dargestellt.</div><div class="method-example">A → 01000001</div></div></div>
         <div class="method-row"><span class="method-icon">🔢</span><div><div class="method-name">Decimal</div><div class="method-desc">Jedes Zeichen wird als ASCII-Dezimalzahl kodiert.</div><div class="method-example">A → 65 · B → 66</div></div></div>
         <div class="method-row"><span class="method-icon">🔡</span><div><div class="method-name">Hexadecimal</div><div class="method-desc">Jedes Zeichen wird als hexadezimaler ASCII-Code dargestellt.</div><div class="method-example">A → 41 · Z → 5A</div></div></div>
-        <div class="method-row"><span class="method-icon">🔀</span><div><div class="method-name">Polyalphabetisch (Vigenère)</div><div class="method-desc">Mehrere Caesar-Shifts mit dem Schlüsselwort "GEHEIM".</div><div class="method-example">HALLO → NKRPZ</div></div></div>
+        <div class="method-row"><span class="method-icon">🔀</span><div><div class="method-name">Polyalphabetisch (Vigenere)</div><div class="method-desc">Mehrere Caesar-Shifts mit dem Schlüsselwort "GEHEIM".</div><div class="method-example">HALLO → NKRPZ</div></div></div>
         <h4 style="margin-top:.8rem;">⏱ Challenge nach dem QR-Code</h4>
         <p>Nach der Erstellung startet automatisch eine 3-Minuten-Challenge — kannst du deine eigene Nachricht entschlüsseln?</p>
     `);
@@ -550,7 +550,7 @@ document.getElementById('generate-btn').addEventListener('click', () => {
         { id: 'binary',   label: 'Binary',           icon: '💾', desc: '0 & 1',     tooltip: 'Stellt Text als 8-Bit Binärzahlen dar (nur 0 und 1)' },
         { id: 'decimal',  label: 'Decimal',          icon: '🔢', desc: 'ASCII 0-9', tooltip: 'Kodiert als ASCII-Dezimalzahlen — z.B. A = 65' },
         { id: 'hex',      label: 'Hexadecimal',      icon: '🔡', desc: '0-9 A-F',   tooltip: 'Kodiert als Hex-ASCII-Codes — z.B. A = 41' },
-        { id: 'vigenere', label: 'Polyalphabetisch', icon: '🔀', desc: 'Vigenère',  tooltip: 'Schlüsselwort "GEHEIM" — jeder Buchstabe anders verschoben' },
+        { id: 'vigenere', label: 'Polyalphabetisch', icon: '🔀', desc: 'Vigenere',  tooltip: 'Schlüsselwort "GEHEIM" — jeder Buchstabe anders verschoben' },
     ];
 
     const RANKS = [
@@ -882,7 +882,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 { pts: 200, q: 'Diese Methode dreht das Alphabet komplett um — A wird Z, B wird Y.', a: 'Atbash' },
                 { pts: 300, q: 'Diese Methode wandelt Text in eine Folge aus Nullen und Einsen um.', a: 'Binary' },
                 { pts: 400, q: 'Diese Kodierung nutzt 64 Zeichen: A–Z, a–z, 0–9 sowie + und /.', a: 'Base64' },
-                { pts: 500, q: 'Diese Vigenère-ähnliche Methode nutzt ein Schlüsselwort statt eines festen Shifts.', a: 'Vigenère' },
+                { pts: 500, q: 'Diese Vigenère-ähnliche Methode nutzt ein Schlüsselwort statt eines festen Shifts.', a: 'Vigenere' },
             ]
         },
         {
